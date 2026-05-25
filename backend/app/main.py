@@ -22,7 +22,7 @@ def create_app() -> FastAPI:
     app.include_router(pdf_import.router)
     app.include_router(interactions.router)
 
-    @app.get("/health")
+    @app.get("/api/health")
     def health() -> dict:
         return {"status": "ok"}
 

@@ -32,7 +32,7 @@ npm run dev
 
 Interface disponible par défaut sur `http://localhost:5173`.
 
-En local, les appels `/api` sont automatiquement proxyfiés vers `http://127.0.0.1:8000` puis réécrits vers les routes FastAPI internes.
+En local, les appels `/api` sont automatiquement proxyfiés vers `http://127.0.0.1:8000`.
 Pour changer l'URL de l'API côté frontend, définir `VITE_API_BASE_URL`.
 
 ## Variables d'environnement backend
@@ -73,7 +73,7 @@ Le repo peut être déployé comme un seul projet Vercel :
 - `frontend/` est buildé en site statique Vite
 - `api/index.py` expose l'application FastAPI
 - le frontend appelle l'API via des routes relatives `/api/...`
-- en production Vercel, le préfixe public `/api` est fourni par le dossier `api/`
+- les routes FastAPI conservent explicitement le préfixe `/api`
 
 Variables d'environnement à configurer sur Vercel :
 

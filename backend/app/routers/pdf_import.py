@@ -8,7 +8,7 @@ from app.services.medication_parser import parse_medications_from_text
 from app.services.patient_store import store
 from app.services.pdf_extractor import extract_pdf_text
 
-router = APIRouter(prefix="/patients/{patient_id}", tags=["pdf"])
+router = APIRouter(prefix="/api/patients/{patient_id}", tags=["pdf"])
 
 
 @router.post("/import-pdf")

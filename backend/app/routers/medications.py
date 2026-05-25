@@ -5,7 +5,7 @@ from fastapi import APIRouter, Response, status
 from app.models.medication import Medication, MedicationCreate, MedicationUpdate
 from app.services.patient_store import store
 
-router = APIRouter(prefix="/patients/{patient_id}/medications", tags=["medications"])
+router = APIRouter(prefix="/api/patients/{patient_id}/medications", tags=["medications"])
 
 
 @router.get("", response_model=list[Medication])

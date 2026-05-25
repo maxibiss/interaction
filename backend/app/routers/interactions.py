@@ -7,7 +7,7 @@ from app.models.interactions import InteractionCheckResult
 from app.services.patient_store import store
 from app.services.rx_label_guard_client import RxLabelGuardClient
 
-router = APIRouter(prefix="/patients/{patient_id}/interactions", tags=["interactions"])
+router = APIRouter(prefix="/api/patients/{patient_id}/interactions", tags=["interactions"])
 
 
 @router.post("/check", response_model=InteractionCheckResult)
