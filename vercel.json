@@ -1,11 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": null,
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/dist",
-  "functions": {
-    "api/index.py": {
-      "includeFiles": "backend/**"
-    }
-  }
+  "framework": "fastapi",
+  "buildCommand": "cd frontend && npm install && npm run build && cd .. && rm -rf public && mkdir -p public && cp -R frontend/dist/. public/"
 }

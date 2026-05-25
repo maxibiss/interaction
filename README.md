@@ -70,10 +70,10 @@ PoC seulement - ne pas utiliser pour une décision clinique sans validation prof
 
 Le repo peut être déployé comme un seul projet Vercel :
 
-- `frontend/` est buildé en site statique Vite
-- `api/index.py` expose l'application FastAPI
+- `frontend/` est buildé vers `public/`
+- `index.py` expose l'application FastAPI
+- Vercel sert `public/` statiquement et la FastAPI app en parallèle
 - le frontend appelle l'API via des routes relatives `/api/...`
-- les routes FastAPI conservent explicitement le préfixe `/api`
 
 Variables d'environnement à configurer sur Vercel :
 
