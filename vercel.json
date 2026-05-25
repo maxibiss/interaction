@@ -1,5 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": null,
-  "buildCommand": "cd frontend && npm install && npm run build && cd .. && rm -rf public && mkdir -p public && cp -R frontend/dist/. public/"
+  "framework": "fastapi",
+  "buildCommand": "cd frontend && npm install && npm run build && cd .. && rm -rf backend/frontend_dist && mkdir -p backend/frontend_dist && cp -R frontend/dist/. backend/frontend_dist/",
+  "functions": {
+    "index.py": {
+      "includeFiles": "backend/frontend_dist/**"
+    }
+  }
 }
