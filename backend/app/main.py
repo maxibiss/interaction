@@ -14,9 +14,9 @@ from app.routers import interactions, medications, patients, pdf_import
 def create_app() -> FastAPI:
     settings = get_settings()
     app = FastAPI(title="Pharma Profile PoC", version="0.1.0")
-    public_dir = Path(__file__).resolve().parents[2] / "public"
-    assets_dir = public_dir / "assets"
-    index_file = public_dir / "index.html"
+    frontend_dist = Path(__file__).resolve().parents[1] / "frontend_dist"
+    assets_dir = frontend_dist / "assets"
+    index_file = frontend_dist / "index.html"
 
     app.add_middleware(
         CORSMiddleware,
@@ -44,7 +44,7 @@ def create_app() -> FastAPI:
 
         @app.get("/{full_path:path}", include_in_schema=False)
         def frontend_fallback(full_path: str) -> FileResponse:
-            candidate = public_dir / full_path
+            candidate = frontend_dist / full_path
             if candidate.exists() and candidate.is_file():
                 return FileResponse(candidate)
             return FileResponse(index_file)
