@@ -13,13 +13,20 @@ class PatientStore:
         self._medication_counter = 0
         self.seed()
 
-    def seed(self) -> None:
-        for name, notes in [
-            ("Patient 1", "Profil fictif de démonstration."),
+    def _seed_templates(self) -> list[tuple[str, str]]:
+        return [
+            ("Patient 1", "Profil fictif de demonstration."),
             ("Patient 2", "Patient fictif pour tests."),
             ("Patient 3", "Profil sans import PDF."),
-        ]:
+        ]
+
+    def seed(self) -> None:
+        for name, notes in self._seed_templates():
             self.create_patient(PatientCreate(display_name=name, notes=notes))
+
+    def ensure_seeded(self) -> None:
+        if not self._patients:
+            self.seed()
 
     def _next_patient_id(self) -> str:
         self._patient_counter += 1
@@ -30,6 +37,7 @@ class PatientStore:
         return f"MED-{self._medication_counter:04d}"
 
     def list_patients(self) -> list[Patient]:
+        self.ensure_seeded()
         return list(self._patients.values())
 
     def create_patient(self, payload: PatientCreate) -> Patient:
@@ -79,7 +87,7 @@ class PatientStore:
                 updated = Medication(**data)
                 medications[index] = updated
                 return updated
-        raise not_found("Médicament introuvable.")
+        raise not_found("Medicament introuvable.")
 
     def delete_medication(self, patient_id: str, medication_id: str) -> None:
         medications = self.list_medications(patient_id)
@@ -87,7 +95,7 @@ class PatientStore:
             if medication.medication_id == medication_id:
                 medications.pop(index)
                 return
-        raise not_found("Médicament introuvable.")
+        raise not_found("Medicament introuvable.")
 
     def mark_pdf_imported(self, patient_id: str) -> Patient:
         patient = self.get_patient(patient_id)

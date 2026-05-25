@@ -13,11 +13,14 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
 
   if (!response.ok) {
     let message = `Erreur ${response.status}`;
-    try {
-      const body = await response.json();
-      message = typeof body.detail === 'string' ? body.detail : JSON.stringify(body.detail ?? body);
-    } catch {
-      message = await response.text();
+    const rawBody = await response.text();
+    if (rawBody) {
+      try {
+        const body = JSON.parse(rawBody) as { detail?: unknown };
+        message = typeof body.detail === 'string' ? body.detail : JSON.stringify(body.detail ?? body);
+      } catch {
+        message = rawBody;
+      }
     }
     throw new Error(message);
   }
