@@ -1,5 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "fastapi",
-  "buildCommand": "cd frontend && npm install && npm run build && cd .. && rm -rf public && mkdir -p public && cp -R frontend/dist/. public/"
+  "buildCommand": "cd frontend && npm install && npm run build && cd .. && mkdir -p public && rm -rf public/assets && cp frontend/dist/index.html public/index.html && cp -R frontend/dist/assets public/assets"
 }
